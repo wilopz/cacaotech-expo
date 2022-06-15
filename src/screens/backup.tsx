@@ -11,6 +11,9 @@ import * as jpeg from "jpeg-js";
 
 import Output from "./Output";
 
+import { StackScreenProps } from '@react-navigation/stack';
+
+interface Props extends StackScreenProps<any,any>{};
 
 async function imageToTensor(source: any) {
   // load the raw data of the selected image into an array
@@ -40,7 +43,8 @@ async function imageToTensor(source: any) {
   return expanded_img
 }
 
-export default function App() {
+export const ModelScreen = ( {navigation}:Props ) => {
+
   const [isTfReady, setTfReady] = useState(false); // gets and sets the Tensorflow.js module loading status
   const [model, setModel] = useState(null); // gets and sets the locally saved Tensorflow.js model
   const [image, setImage] = useState(null); // gets and sets the image selected from the user
@@ -55,8 +59,8 @@ export default function App() {
       console.log("[+] TensorFlow JS: Ready")
       // bundle the model files and load the model:
       console.log("[+] Loading Model")
-      const model = require("./assets/final_model.json");
-      const weights = require("./assets/final_model.bin");
+      const model = require("./modelo/final_model.json");
+      const weights = require("./modelo/final_model.bin");
       // const model = require("./assets/model.json");
       // const weights = require("./assets/model.bin");
       const loadedModel = await tf.loadLayersModel(

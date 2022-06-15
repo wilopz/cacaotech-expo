@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     height: height,
     width: width,
+    flex: 1,
   },
   imagescreen: {
     height: height*0.55,
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: height*0.60,
     width: width,
+    flex: 1,
     position: 'absolute',
     bottom: 0,
     borderTopLeftRadius: 50,
