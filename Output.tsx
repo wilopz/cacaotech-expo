@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import {
     StyleSheet,
@@ -23,7 +21,7 @@ export default function Output(props: any) {
                         Probability:{" "}
                     </Text>
                     <Text style={styles.predictedNumber}>
-                        {Math.round(predictions.dataSync()[0] * 100)}{" "}
+                        {Math.round(predictions.dataSync()[3])}{" "}
                         {/* convert tensor into array and access the first category probability*/}
                         <Text style={styles.predictedNumberPercentage}> %</Text>
                     </Text>

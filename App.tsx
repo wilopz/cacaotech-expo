@@ -1,59 +1,24 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View } from 'react-native';
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.tsx to start working on your app!</Text>
-//       <Text> Hola Patricio!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
-
-
-import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import * as tf from "@tensorflow/tfjs";
+import React, { useState, useEffect } from "react";
+
 import { fetch, bundleResourceIO } from "@tensorflow/tfjs-react-native";
-import Constants from "expo-constants";
-import * as Permissions from "expo-permissions";
+import * as tf from "@tensorflow/tfjs";
+
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from 'expo-file-system'
 import * as jpeg from "jpeg-js";
+
+
 import Output from "./Output";
 
-// async function getPermissionAsync() {
-//   if (Constants.platform.ios) {
-//     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-//     if (status !== "granted") {
-//       alert("Permission for camera access required.");
-//     }
-//   }
-// }
 
 async function imageToTensor(source: any) {
   // load the raw data of the selected image into an array
-  const imgB64 =  await FileSystem.readAsStringAsync(source.uri, {
-    encoding: FileSystem.EncodingType.Base64,
-  });
+  const imgB64 =  await FileSystem.readAsStringAsync(source.uri, {encoding: FileSystem.EncodingType.Base64});
   const imgBuffer = tf.util.encodeString(imgB64, 'base64').buffer;
-  const rawImageData = new Uint8Array(imgBuffer) 
-  // const response = await fetch(source.uri, {}, { isBinary: true });
-  // const rawImageData = await response.arrayBuffer();
-  const { width, height, data } = jpeg.decode(rawImageData, {
-    useTArray: true, // Uint8Array = true
-  });
+  const rawImageData = new Uint8Array(imgBuffer);
+
+  const { width, height, data } = jpeg.decode(rawImageData, { useTArray: true });
 
   // remove the alpha channel:
   const buffer = new Uint8Array(width * height * 3);
@@ -64,29 +29,15 @@ async function imageToTensor(source: any) {
     buffer[i + 2] = data[offset + 2];
     offset += 4;
   }
-
   // transform image data into a tensor
-  const img = tf.tensor3d(buffer, [width, height, 3]);
-
-  // calculate square center crop area
-  const shorterSide = Math.min(width, height);
-  const startingHeight = (height - shorterSide) / 2;
-  const startingWidth = (width - shorterSide) / 2;
-  const endingHeight = startingHeight + shorterSide;
-  const endingWidth = startingWidth + shorterSide;
-
-  // slice and resize the image
-  const sliced_img = img.slice(
-    [startingWidth, startingHeight, 0],
-    [endingWidth, endingHeight, 3]
-  );
-  const resized_img = tf.image.resizeBilinear(sliced_img, [224, 224]);
+  const img = tf.tensor3d(buffer, [width, height, 3]); //######
+  
+  const resized_img = tf.image.resizeBilinear(img, [224, 224]);
 
   // add a fourth batch dimension to the tensor
   const expanded_img = resized_img.expandDims(0);
 
-  // normalise the rgb values to -1-+1
-  return expanded_img.toFloat().div(tf.scalar(127)).sub(tf.scalar(1));
+  return expanded_img
 }
 
 export default function App() {
@@ -95,7 +46,7 @@ export default function App() {
   const [image, setImage] = useState(null); // gets and sets the image selected from the user
   const [predictions, setPredictions] = useState(null); // gets and sets the predicted value from the model
   const [error, setError] = useState(false); // gets and sets any errors
-  // console.log("[+] Application started")
+  console.log("[+] Application started")
 
   useEffect(() => {
     (async () => {
@@ -114,7 +65,6 @@ export default function App() {
       console.log("[+] Model Loaded")
 
       setModel(loadedModel); // load the model to the state
-      // getPermissionAsync(); // get the permission for camera roll access for iOS users
     })();
   }, []);
 
@@ -133,7 +83,7 @@ export default function App() {
         const imageTensor = await imageToTensor(source); // prepare the image
         const predictions = await model.predict(imageTensor); // send the image to the model
         console.log(predictions.toString())
-        console.log(`Predictions: ${predictions.dataSync()}`)
+        // console.log(`Predictions: ${predictions.dataSync()}`)
         setPredictions(predictions); // put model prediction to the state
       }
     } catch (error) {
@@ -183,7 +133,8 @@ export default function App() {
         </Text>
         <TouchableOpacity
           style={styles.imageContainer}
-          onPress={model && !predictions ? handlerSelectImage : () => { }} // Activates handler only if the model has been loaded and there are no predictions done yet
+          onPress={model && !predictions ? handlerSelectImage : () => { }} 
+          // Activates handler only if the model has been loaded and there are no predictions done yet
         >
         </TouchableOpacity>
         <Output
