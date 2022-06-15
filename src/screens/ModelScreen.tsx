@@ -135,49 +135,82 @@ export const ModelScreen = ( {navigation}:Props ) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.innercontainer}>
-        <Text style={styles.status}>
-          {statusMessage} {showReset ? resetLink : null}
-        </Text>
-        <TouchableOpacity
-          style={styles.imageContainer}
-          onPress={model && !predictions ? handlerSelectImage : () => { }} 
-          // Activates handler only if the model has been loaded and there are no predictions done yet
-        >
-          <ImageBackground
-            source={image}
-            style={styles.predictedImage}
-            imageStyle={styles.predictedImageExtras}
-          ></ImageBackground>
-        </TouchableOpacity>
-        <Output
-          status={status}
-          image={image}
-          predictions={predictions}
-          error={error}
-        />
+      <ImageBackground
+          style={styles.imagescreen}
+          source={ require('../images/screen4.jpg')}
+      />
+      <View style = {styles.panel}>
+        <View style={styles.textos}>
+            <Text style = {[
+                    styles.text, 
+                    styles.textTittle,    
+                ]}>
+              Hola, David Olarte
+            </Text>
+
+            <Text style = {[
+                    styles.text, 
+                    styles.text3
+                ]}>
+              Adjunta aqui las fotografias de tus frutos para que podamos identificarlas
+            </Text>
+        </View>
+        <View style={styles.innercontainer}>
+          <Text style={styles.status}>
+            {statusMessage} {showReset ? resetLink : null}
+          </Text>
+          <TouchableOpacity
+            style={styles.imageContainer}
+            onPress={model && !predictions ? handlerSelectImage : () => { }} 
+            // Activates handler only if the model has been loaded and there are no predictions done yet
+          >
+            <ImageBackground
+              source={image}
+              style={styles.predictedImage}
+              imageStyle={styles.predictedImageExtras}
+            ></ImageBackground>
+          </TouchableOpacity>
+          <Output
+            status={status}
+            image={image}
+            predictions={predictions}
+            error={error}
+          />
+        </View>
       </View>
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#67a4cf",
-    alignItems: "center",
-    justifyContent: "center",
     flex: 1,
+    alignSelf: 'flex-start'
+  },
+  panel:{
+    backgroundColor: 'white',
+    height:'60%',
+    width: '100%',
+    position: 'absolute',
+    bottom: 125,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+  imagescreen: {
+    height: '55%',
+    width: '100%',
   },
   innercontainer: {
-    marginTop: -50,
+    marginTop: 0,
     alignItems: "center",
     justifyContent: "center",
   },
   status: { marginBottom: 10, fontSize: 16 },
   reset: { color: "blue" },
   imageContainer: {
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -186,8 +219,8 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderStyle: "dotted",
   },
-  predictedNumberHeader: { fontSize: 12, color: "white" },
-    predictedNumberPercentage: { fontSize: 24, color: "white" },
+  predictedNumberHeader: { fontSize: 12, color: "black" },
+    predictedNumberPercentage: { fontSize: 24, color: "black" },
     predictedNumber: {
         fontSize: 64,
         fontWeight: "bold",
@@ -198,10 +231,31 @@ const styles = StyleSheet.create({
         shadowOffset: { height: 10, width: 10 },
     },
   predictedImage: {
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
     alignItems: "center",
     justifyContent: "center",
+  },
+  text: {
+    fontFamily: 'Mulish',
+    alignSelf: 'center',
+  },
+  textTittle:{
+    fontSize: 30,
+    fontWeight: "bold",
+    bottom: 70,
+    color: 'black',
+  },
+  text3:{
+      fontSize: 16,
+      bottom: 60,
+      color: 'black',
+      textAlign: 'center',
+      width: 350
+  },
+  textos: {
+    height: 200, 
+    bottom: -100,
   },
   placeholder: { fontSize: 50 },
   predictedImageExtras: { borderRadius: 20 },
