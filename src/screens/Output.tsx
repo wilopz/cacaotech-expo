@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     predictedValue: {
         fontSize: 64,
         fontWeight: "bold",
-        color: "green",
+        color: "#2094FE",
         shadowOpacity: 0.75,
         shadowRadius: 5,
         shadowColor: "black",

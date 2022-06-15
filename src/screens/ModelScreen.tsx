@@ -139,6 +139,7 @@ export const ModelScreen = ( {navigation}:Props ) => {
           style={styles.imagescreen}
           source={ require('../images/screen4.jpg')}
       />
+      
       <View style = {styles.panel}>
         <View style={styles.textos}>
             <Text style = {[
@@ -190,10 +191,11 @@ const styles = StyleSheet.create({
   },
   panel:{
     backgroundColor: 'white',
-    height:'60%',
+    height:'80%',
     width: '100%',
+    flex: 1,
     position: 'absolute',
-    bottom: 125,
+    bottom: 0,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
   },
@@ -207,7 +209,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   status: { marginBottom: 10, fontSize: 16 },
-  reset: { color: "blue" },
+  reset: { color: "#2094FE" },
   imageContainer: {
     width: 250,
     height: 250,

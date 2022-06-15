@@ -26,16 +26,18 @@ export const InicioScreen = ( {navigation}:Props ) => {
                 styles.text, 
                 styles.text1
             ]}>
-          ingresa tus credenciales
+          Ingresa tus credenciales
         </Text>
 
         <TextInput
             style={styles.inputEmail}
-            placeholder="ingresa tu email"
+            placeholder="Ingresa tu email"
+            keyboardType="email-address"
         />
         <TextInput
             style={styles.inputContrasena}
-            placeholder="contraseña"
+            placeholder="Contraseña"
+            secureTextEntry={true}
         />
 
         <TouchableOpacity
@@ -46,7 +48,7 @@ export const InicioScreen = ( {navigation}:Props ) => {
         </TouchableOpacity> 
 
         <TouchableOpacity 
-              onPress={ () => navigation.navigate('ModelScreen') }
+              onPress={ () => navigation.navigate('RegisterScreen') }
         >
             <Text style = {styles.textRegistro} >
               ¿No tienes una cuenta? {"\n"}
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
   },
   panel:{
     backgroundColor: 'white',
-    height: height*0.60,
+    height: height*0.55,
     width: width,
     flex: 1,
     position: 'absolute',
@@ -97,10 +99,10 @@ const styles = StyleSheet.create({
   inputEmail:{
     backgroundColor:'#F5F5F5',
     color: '#9E9E9E',
-    marginTop: 50,
+    marginTop: 40,
     alignSelf:'center',
     width: width*0.8,
-    height: height*0.06,
+    height: height*0.065,
     borderRadius: 10,
     padding: 15,
   },
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     alignSelf:'center',
     width: width*0.8,
-    height: height*0.06,
+    height: height*0.065,
     borderRadius: 10,
     padding: 15,
   },
@@ -120,7 +122,6 @@ const styles = StyleSheet.create({
     height: height*0.065,
     alignSelf: 'center',
     borderRadius: 10,
-    marginTop: 20,
   },
   textButton: {
     fontSize: 16,
