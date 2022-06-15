@@ -1,4 +1,4 @@
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, ImageBackground } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import { fetch, bundleResourceIO } from "@tensorflow/tfjs-react-native";
@@ -81,10 +81,14 @@ export default function App() {
         const source = { uri: response.uri };
         setImage(source); // put image path to the state
         const imageTensor = await imageToTensor(source); // prepare the image
-        const predictions = await model.predict(imageTensor); // send the image to the model
+        let predictions = await model.predict(imageTensor); // send the image to the model
+        predictions = predictions.dataSync();
+        let classIndex = predictions.indexOf(Math.max(...predictions));
+        let classes: string[]= ['CCN51', 'FEAR5', 'TCS01', 'TCS19']
+        let result: any = classes[classIndex]
         console.log(predictions.toString())
         // console.log(`Predictions: ${predictions.dataSync()}`)
-        setPredictions(predictions); // put model prediction to the state
+        setPredictions(result); // put model prediction to the state
       }
     } catch (error) {
       setError(error);
@@ -100,27 +104,27 @@ export default function App() {
   let status, statusMessage, showReset;
   const resetLink = (
     <Text onPress={reset} style={styles.reset}>
-      Restart
+      Reiniciar
     </Text>
   );
 
   if (!error) {
     if (isTfReady && model && !image && !predictions) {
       status = "modelReady";
-      statusMessage = "Model is ready.";
+      statusMessage = "Modelo Preparado!";
     } else if (model && image && predictions) {
       status = "finished";
-      statusMessage = "Prediction finished.";
+      statusMessage = "Prediccion Finalizada.";
       showReset = true;
     } else if (model && image && !predictions) {
       status = "modelPredict";
-      statusMessage = "Model is predicting...";
+      statusMessage = "Prediciendo...";
     } else {
       status = "modelLoad";
-      statusMessage = "Model is loading...";
+      statusMessage = "Cargando modelo...";
     }
   } else {
-    statusMessage = "Unexpected error occured.";
+    statusMessage = "Error inesperado!";
     showReset = true;
     console.log(error);
   }
@@ -136,6 +140,11 @@ export default function App() {
           onPress={model && !predictions ? handlerSelectImage : () => { }} 
           // Activates handler only if the model has been loaded and there are no predictions done yet
         >
+          <ImageBackground
+            source={image}
+            style={styles.predictedImage}
+            imageStyle={styles.predictedImageExtras}
+          ></ImageBackground>
         </TouchableOpacity>
         <Output
           status={status}
@@ -160,13 +169,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  status: { marginBottom: 10 },
+  status: { marginBottom: 10, fontSize: 16 },
   reset: { color: "blue" },
   imageContainer: {
     width: 300,
     height: 300,
     borderRadius: 20,
-    opacity: 0.7,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "lightgrey",
@@ -185,4 +193,12 @@ const styles = StyleSheet.create({
         shadowColor: "black",
         shadowOffset: { height: 10, width: 10 },
     },
+  predictedImage: {
+    width: 300,
+    height: 300,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  placeholder: { fontSize: 50 },
+  predictedImageExtras: { borderRadius: 20 },
 });
