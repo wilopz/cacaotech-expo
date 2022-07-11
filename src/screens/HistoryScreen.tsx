@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity, ScrollView, InteractionManager } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -9,205 +8,122 @@ interface Props extends StackScreenProps<any,any>{};
 
 const { width, height } = Dimensions.get('window');
 
-export const RegisterScreen = ( {navigation}:Props ) => {
+export const HistoryScreen = ( {navigation}:Props ) => {
 
   const [isSelected, setSelection] = useState(false);
 
   //Contenido del scrollview
   let [matriz, setMatriz] = useState([
-    { key:'1', 
+
+    { key:'1',
     action: 
-    <View>
-      <Text style = {[
-                  styles.text, 
-                  styles.textTittle,
-              ]}
-              >
-            Registra aqui tus datos
-      </Text>
-
-      <Text style = {styles.textPregunta}>
-        Nombre completo*
-      </Text>
-
-      <TextInput
-        style={styles.inputNombre}
-        placeholder="ingresa tu nombre"
-      />
-
-      <View style={{flexDirection:'row'}}>
-        <Text style = {styles.textPreguntaTipo}>
-            Tipo *
+      <>
+        <Text style = {[
+              styles.text, 
+              styles.textTittle
+            ]}>
+          Historial de análisis
         </Text>
-
-        <Text style = {styles.textPreguntaDocumento}>
-            Número de documento*
-        </Text>
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <TextInput
-            style={styles.inputTipo}
-            placeholder="CC"
-            editable={false}
-            
-        />
-        <TextInput
-            style={styles.inputDocumento}
-            placeholder="Número"
-            />
-      </View>
-
-      <Text style = {styles.textPreguntaEmail}>
-          Email*
-      </Text>
-
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="ingresa tu correo electrónico"
-          keyboardType="email-address"
-      />
-      
-      <Text style = {styles.textPreguntaEmail}>
-        Contraseña*
-      </Text>
-
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="************"
-          secureTextEntry={true}
-      />
-
-      <Text style = {styles.textPreguntaEmail}>
-        Confirmar Contraseña*
-      </Text>
-
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="************"
-          secureTextEntry={true}
-      />
-
-    </View>
+      </>
     },
 
     { key:'2', 
+    action:
+      <>
+        <View style = {styles.consultas}>
+          <View style = {styles.izquierdo}>
+            <View style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.fechas}>Análisis --/--/--</Text>
+            </View>
+            <View  style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
+            </View>
+          </View>
+          <View style = {styles.derecho}>
+            <Text style = {styles.textanalisis}>Estado:</Text>
+          </View>
+        </View>
+      </>
+      
+    },
+
+    { key:'3', 
     action: 
-    <View>
-      <Text style = {styles.textPreguntaFinca}>
-          Nombre de tu finca
-      </Text>
-      
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="ingresa el nombre de tu finca"
-      />
-
-      <Text style = {styles.textPreguntaFinca}>
-          Ubicación
-      </Text>
-      
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="ingresa la ubicación"
-      />
-
-      <View style={{flexDirection:'row'}}>
-        <Text style = {styles.textPreguntaAreaTotal}>
-            Tamaño del predio
-        </Text>
-
-        <Text style = {styles.textPreguntaUnidades}>
-            Unidades
-        </Text>
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <TextInput
-            style={styles.inputAreaTotal}
-            placeholder="100"
-        />
-        <TextInput
-            style={styles.inputUnidades}
-            placeholder="Hectareas"
-            editable={false}
-            />
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <Text style = {styles.textPreguntaAreaTotal}>
-            Tamaño del cultivo de cacao
-        </Text>
-
-        <Text style = {styles.textPreguntaUnidadesCultivo}>
-            Unidades
-        </Text>
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <TextInput
-            style={styles.inputAreaTotal}
-            placeholder="100"
-        />
-        <TextInput
-            style={styles.inputUnidades}
-            placeholder="Hectareas"
-            editable={false}
-            />
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <Text style = {styles.textPreguntaAreaTotal}>
-            Tamaño de cultivo criollo
-        </Text>
-
-        <Text style = {styles.textPreguntaUnidadesCultivo2}>
-            Unidades
-        </Text>
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <TextInput
-            style={styles.inputAreaTotal}
-            placeholder="100"
-        />
-        <TextInput
-            style={styles.inputUnidades}
-            placeholder="Hectareas"
-            editable={false}
-            />
-      </View>
-      
-      <Text style = {styles.textPregunta}>
-          Clones de cacao 
-      </Text>
-      
-      <TextInput
-          style={styles.inputNombre2}
-          placeholder="ingresa los clones que crea que tiene"
-      />
-
-    </View>
+      <>
+        <View style = {styles.consultas}>
+          <View style = {styles.izquierdo}>
+            <View style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.fechas}>Análisis --/--/--</Text>
+            </View>
+            <View  style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
+            </View>
+          </View>
+          <View style = {styles.derecho}>
+            <Text style = {styles.textanalisis}>Estado:</Text>
+          </View>
+        </View>
+      </>
     },
 
     { key:'4',
     action: 
-    <View style={styles.margenInferior}> 
-      <TouchableOpacity
-          style={styles.buttonCp}
-          onPress={ () => navigation.navigate('InicioScreen')}
-        > 
-          <Text style= { styles.textButton }>{'Crear Usuario'}</Text>
-      </TouchableOpacity> 
-    </View> 
+      <>
+        <View style = {styles.consultas}>
+          <View style = {styles.izquierdo}>
+            <View style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.fechas}>Análisis --/--/--</Text>
+            </View>
+            <View  style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
+            </View>
+          </View>
+          <View style = {styles.derecho}>
+            <Text style = {styles.textanalisis}>Estado:</Text>
+          </View>
+        </View>
+      </>
     },
 
     { key:'5',
-    action: 
-    <View style={styles.margenInferior}> 
-      <Text></Text>
-    </View> 
-    },
+    action:
+      <>
+        <View style={styles.margenInferior}> 
+          <TouchableOpacity
+              style={styles.buttonCp}
+              onPress={ () => console.log('borrar')}
+            > 
+              <Text style= { styles.textButton }>{'Borrar selección'}</Text>
+          </TouchableOpacity> 
+        </View>
+        <View style={styles.margenInferior}> 
+          <TouchableOpacity
+              style={styles.buttonCp}
+              onPress={ () => navigation.navigate('ModelScreen')}
+            > 
+              <Text style= { styles.textButton }>{'Regresar'}</Text>
+          </TouchableOpacity> 
+        </View> 
+      </>
+    }
 
   ]);
 
@@ -215,7 +131,7 @@ export const RegisterScreen = ( {navigation}:Props ) => {
     <View style={styles.container}>
       <ImageBackground
           style={styles.imagescreen}
-          source={ require('../images/screen3.jpg')}
+          source={ require('../images/screen1.jpg')}
       />
       
       <View style={styles.panel}> 
@@ -418,6 +334,39 @@ const styles = StyleSheet.create({
     marginLeft: width*0.05,
     paddingLeft: 15,
     marginBottom: 20,
+  },
+  fechas:{
+    fontFamily: 'Mulish',
+    alignSelf: 'center',
+    fontWeight:'bold',
+    color:'#2094FE',
+  },
+  textanalisis: {
+    fontFamily: 'Mulish',
+    fontWeight:'bold',
+    alignSelf: 'center',
+    position: 'absolute',
+  },
+  consultas:{
+    flexDirection:'row',
+    alignSelf:'center',
+    width: width*0.8,
+    height: height*0.07,
+    backgroundColor:'#F5F5F5',
+    borderWidth: 1,
+    borderRadius:10,
+    marginBottom: width*0.05
+  },
+  derecho:{
+    width:'45%',
+    height:'100%',
+    justifyContent:'center',
+  },
+  izquierdo:{
+    width:'45%',
+    height:'100%',
+    justifyContent:'space-between',
+    alignItems:'center',
   },
   textPreguntaUnidadesCultivo:{
     fontFamily: 'Mulish',

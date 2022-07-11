@@ -4,6 +4,7 @@ import { InicioScreen } from '../screens/InicioScreen';
 import { ModelScreen } from "../screens/ModelScreen";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RegisterScreen } from "../screens/RegisterScreen";
+import { HistoryScreen } from "../screens/HistoryScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export const StackNavigator =() => {
         <Stack.Screen name="InicioScreen" component={ InicioScreen } />
         <Stack.Screen name="ModelScreen" component={ ModelScreen } />
         <Stack.Screen name="RegisterScreen" component={ RegisterScreen } />
+        <Stack.Screen name="HistoryScreen" component={ HistoryScreen } />
     </Stack.Navigator>
   );
 }

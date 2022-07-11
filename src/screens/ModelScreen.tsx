@@ -1,4 +1,4 @@
-import { StyleSheet, View, TouchableOpacity, Text, ImageBackground } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, ImageBackground, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import { fetch, bundleResourceIO } from "@tensorflow/tfjs-react-native";
@@ -14,6 +14,8 @@ import Output from "./Output";
 import { StackScreenProps } from '@react-navigation/stack';
 
 interface Props extends StackScreenProps<any,any>{};
+
+const { width, height } = Dimensions.get('window');
 
 async function imageToTensor(source: any) {
   // load the raw data of the selected image into an array
@@ -146,7 +148,7 @@ export const ModelScreen = ( {navigation}:Props ) => {
                     styles.text, 
                     styles.textTittle,    
                 ]}>
-              Hola, David Olarte
+              Hola de nuevo!!
             </Text>
 
             <Text style = {[
@@ -178,7 +180,27 @@ export const ModelScreen = ( {navigation}:Props ) => {
             error={error}
           />
         </View>
+        <View style={{
+          marginBottom: height*0.01,
+          marginTop: height*0.01
+        }}>
+        <TouchableOpacity
+            style={styles.buttonCp}
+            onPress={ () => navigation.navigate('HistoryScreen')}
+          > 
+            <Text style= { styles.textButton }>{'Historial'}</Text>
+        </TouchableOpacity> 
+        </View>
+        <View>
+        <TouchableOpacity
+            style={styles.buttonCp}
+            onPress={ () => navigation.navigate('InicioScreen')}
+          > 
+            <Text style= { styles.textButton }>{'Salir'}</Text>
+        </TouchableOpacity> 
+        </View>
       </View>
+      
       
     </View>
   );
@@ -211,8 +233,8 @@ const styles = StyleSheet.create({
   status: { marginBottom: 10, fontSize: 16 },
   reset: { color: "#2094FE" },
   imageContainer: {
-    width: 250,
-    height: 250,
+    width: 200,
+    height: 200,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -237,6 +259,20 @@ const styles = StyleSheet.create({
     height: 250,
     alignItems: "center",
     justifyContent: "center",
+  },
+  buttonCp: {
+    backgroundColor: '#2094FE',
+    width: width*0.8, 
+    height: height*0.065,
+    alignSelf: 'center',
+    borderRadius: 10,
+  },
+  textButton: {
+    fontSize: 16,
+    color: 'white',
+    alignSelf: 'center',
+    fontWeight: "bold",
+    margin: height*0.015,
   },
   text: {
     fontFamily: 'Mulish',
