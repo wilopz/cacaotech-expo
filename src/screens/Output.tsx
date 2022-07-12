@@ -18,7 +18,7 @@ export default function Output(props: any) {
             output = (
                 <View style={styles.prediction}>
                     <Text style={styles.predictedHeader}>
-                        La imagen corresponde a un fruto del tipo:{" "}
+                        El fruto corresponde a un clon del tipo:{" "}
                     </Text>
                     <Text style={styles.predictedValue}>
                         {predictions}{" "}
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     placeholder: { fontSize: 50 },
     predictedImageExtras: { borderRadius: 20 },
-    predictedHeader: { fontSize: 16, color: "white" },
+    predictedHeader: { fontSize: 16, color: "black" },
     predictedValue: {
         fontSize: 64,
         fontWeight: "bold",

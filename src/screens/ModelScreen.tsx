@@ -173,12 +173,15 @@ export const ModelScreen = ( {navigation}:Props ) => {
               imageStyle={styles.predictedImageExtras}
             ></ImageBackground>
           </TouchableOpacity>
-          <Output
-            status={status}
-            image={image}
-            predictions={predictions}
-            error={error}
-          />
+          <View>
+            <Output
+              status={status}
+              image={image}
+              predictions={predictions}
+              error={error}
+            />
+          </View>
+
         </View>
         <View style={{
           marginBottom: height*0.01,
@@ -233,8 +236,8 @@ const styles = StyleSheet.create({
   status: { marginBottom: 10, fontSize: 16 },
   reset: { color: "#2094FE" },
   imageContainer: {
-    width: 200,
-    height: 200,
+    width: 250,
+    height: 250,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -286,13 +289,13 @@ const styles = StyleSheet.create({
   },
   text3:{
       fontSize: 16,
-      bottom: 60,
+      bottom: 50,
       color: 'black',
       textAlign: 'center',
       width: 350
   },
   textos: {
-    height: 200, 
+    height: 175, 
     bottom: -100,
   },
   placeholder: { fontSize: 50 },

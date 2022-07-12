@@ -104,6 +104,81 @@ export const HistoryScreen = ( {navigation}:Props ) => {
     },
 
     { key:'5',
+    action: 
+      <>
+        <View style = {styles.consultas}>
+          <View style = {styles.izquierdo}>
+            <View style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.fechas}>Análisis --/--/--</Text>
+            </View>
+            <View  style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
+            </View>
+          </View>
+          <View style = {styles.derecho}>
+            <Text style = {styles.textanalisis}>Estado:</Text>
+          </View>
+        </View>
+      </>
+    },
+
+    { key:'6',
+    action: 
+      <>
+        <View style = {styles.consultas}>
+          <View style = {styles.izquierdo}>
+            <View style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.fechas}>Análisis --/--/--</Text>
+            </View>
+            <View  style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
+            </View>
+          </View>
+          <View style = {styles.derecho}>
+            <Text style = {styles.textanalisis}>Estado:</Text>
+          </View>
+        </View>
+      </>
+    },
+
+    { key:'7',
+    action: 
+      <>
+        <View style = {styles.consultas}>
+          <View style = {styles.izquierdo}>
+            <View style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.fechas}>Análisis --/--/--</Text>
+            </View>
+            <View  style = {{
+              width:'100%',
+              height:'50%',
+            }}>
+              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
+            </View>
+          </View>
+          <View style = {styles.derecho}>
+            <Text style = {styles.textanalisis}>Estado:</Text>
+          </View>
+        </View>
+      </>
+    },
+
+    { key:'8',
     action:
       <>
         <View style={styles.margenInferior}> 
