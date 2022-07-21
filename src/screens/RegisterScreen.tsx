@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity, ScrollView, InteractionManager } from 'react-native';
+import { View, StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity, ScrollView, InteractionManager, Button } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
 
@@ -9,207 +9,29 @@ interface Props extends StackScreenProps<any,any>{};
 
 const { width, height } = Dimensions.get('window');
 
+
+
 export const RegisterScreen = ( {navigation}:Props ) => {
 
-  const [isSelected, setSelection] = useState(false);
+  const [state, setState] = useState({
+    Nombre: "",
+    Documento: "",
+    Correo: "",
+    Contraseña: "",
+    nFinca: "",
+    Ubicacion: "",
+    tCultivo: "",
+    clonCacao: ""
+
+  })
+
+  const handleChangeText = (name: any, value: any) => {
+    setState({...state, [name]: value})
+  }
+
+ //const [isSelected, setSelection] = useState(false);
 
   //Contenido del scrollview
-  let [matriz, setMatriz] = useState([
-    { key:'1', 
-    action: 
-    <View>
-      <Text style = {[
-                  styles.text, 
-                  styles.textTittle,
-              ]}
-              >
-            Registra aqui tus datos
-      </Text>
-
-      <Text style = {styles.textPregunta}>
-        Nombre completo*
-      </Text>
-
-      <TextInput
-        style={styles.inputNombre}
-        placeholder="ingresa tu nombre"
-      />
-
-      <View style={{flexDirection:'row'}}>
-        <Text style = {styles.textPreguntaTipo}>
-            Tipo *
-        </Text>
-
-        <Text style = {styles.textPreguntaDocumento}>
-            Número de documento*
-        </Text>
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <TextInput
-            style={styles.inputTipo}
-            placeholder="CC"
-            editable={false}
-            
-        />
-        <TextInput
-            style={styles.inputDocumento}
-            placeholder="Número"
-            />
-      </View>
-
-      <Text style = {styles.textPreguntaEmail}>
-          Email*
-      </Text>
-
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="ingresa tu correo electrónico"
-          keyboardType="email-address"
-      />
-      
-      <Text style = {styles.textPreguntaEmail}>
-        Contraseña*
-      </Text>
-
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="************"
-          secureTextEntry={true}
-      />
-
-      <Text style = {styles.textPreguntaEmail}>
-        Confirmar Contraseña*
-      </Text>
-
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="************"
-          secureTextEntry={true}
-      />
-
-    </View>
-    },
-
-    { key:'2', 
-    action: 
-    <View>
-      <Text style = {styles.textPreguntaFinca}>
-          Nombre de tu finca
-      </Text>
-      
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="ingresa el nombre de tu finca"
-      />
-
-      <Text style = {styles.textPreguntaFinca}>
-          Ubicación
-      </Text>
-      
-      <TextInput
-          style={styles.inputNombre}
-          placeholder="ingresa la ubicación"
-      />
-
-      <View style={{flexDirection:'row'}}>
-        <Text style = {styles.textPreguntaAreaTotal}>
-            Tamaño del predio
-        </Text>
-
-        <Text style = {styles.textPreguntaUnidades}>
-            Unidades
-        </Text>
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <TextInput
-            style={styles.inputAreaTotal}
-            placeholder="100"
-        />
-        <TextInput
-            style={styles.inputUnidades}
-            placeholder="Hectareas"
-            editable={false}
-            />
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <Text style = {styles.textPreguntaAreaTotal}>
-            Tamaño del cultivo de cacao
-        </Text>
-
-        <Text style = {styles.textPreguntaUnidadesCultivo}>
-            Unidades
-        </Text>
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <TextInput
-            style={styles.inputAreaTotal}
-            placeholder="100"
-        />
-        <TextInput
-            style={styles.inputUnidades}
-            placeholder="Hectareas"
-            editable={false}
-            />
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <Text style = {styles.textPreguntaAreaTotal}>
-            Tamaño de cultivo criollo
-        </Text>
-
-        <Text style = {styles.textPreguntaUnidadesCultivo2}>
-            Unidades
-        </Text>
-      </View>
-
-      <View style={{flexDirection:'row'}}>
-        <TextInput
-            style={styles.inputAreaTotal}
-            placeholder="100"
-        />
-        <TextInput
-            style={styles.inputUnidades}
-            placeholder="Hectareas"
-            editable={false}
-            />
-      </View>
-      
-      <Text style = {styles.textPregunta}>
-          Clones de cacao 
-      </Text>
-      
-      <TextInput
-          style={styles.inputNombre2}
-          placeholder="ingresa los clones que crea que tiene"
-      />
-
-    </View>
-    },
-
-    { key:'4',
-    action: 
-    <View style={styles.margenInferior}> 
-      <TouchableOpacity
-          style={styles.buttonCp}
-          onPress={ () => navigation.navigate('InicioScreen')}
-        > 
-          <Text style= { styles.textButton }>{'Crear Usuario'}</Text>
-      </TouchableOpacity> 
-    </View> 
-    },
-
-    { key:'5',
-    action: 
-    <View style={styles.margenInferior}> 
-      <Text></Text>
-    </View> 
-    },
-
-  ]);
 
   return (
     <View style={styles.container}>
@@ -225,15 +47,161 @@ export const RegisterScreen = ( {navigation}:Props ) => {
         </View>  
 
         <ScrollView style={{flex:1, height:height}}>
-          { 
-            matriz.map((item) => {
-              return (
-                  <View key = {item.key}>
-                  {item.action}
-                  </View>
-                  )
-              })
-          }
+          
+          <Text style = {[
+                      styles.text, 
+                      styles.textTittle,
+                  ]}
+                  >
+                Registra aqui tus datos
+          </Text>
+
+          <Text style = {styles.textPregunta}>
+            Nombre completo*
+          </Text>
+
+          <TextInput
+            style={styles.inputNombre}
+            placeholder="ingresa tu nombre"
+            onChangeText={(value) => handleChangeText("Nombre",  value)}
+          />
+
+          <View style={{flexDirection:'row'}}>
+            <Text style = {styles.textPreguntaTipo}>
+                Tipo *
+            </Text>
+
+            <Text style = {styles.textPreguntaDocumento}>
+                Número de documento*
+            </Text>
+          </View>
+
+          <View style={{flexDirection:'row'}}>
+            <TextInput
+                style={styles.inputTipo}
+                placeholder="CC"
+                editable={false}
+                
+            />
+            <TextInput
+                style={styles.inputDocumento}
+                placeholder="Número"
+                onChangeText={(value) => handleChangeText("Documento",  value)}
+                />
+          </View>
+
+          <Text style = {styles.textPreguntaEmail}>
+              Email*
+          </Text>
+
+          <TextInput
+              style={styles.inputNombre}
+              placeholder="ingresa tu correo electrónico"
+              keyboardType="email-address"
+              onChangeText={(value) => handleChangeText("Correo",  value)}
+          />
+          
+          <Text style = {styles.textPreguntaEmail}>
+            Contraseña*
+          </Text>
+
+          <TextInput
+              style={styles.inputNombre}
+              placeholder="************"
+              secureTextEntry={true}
+              onChangeText={(value) => handleChangeText("Contraseña",  value)}
+          />
+
+          <Text style = {styles.textPreguntaEmail}>
+            Confirmar Contraseña*
+          </Text>
+
+          <TextInput
+              style={styles.inputNombre}
+              placeholder="************"
+              secureTextEntry={true}
+          />
+
+          <Text style = {styles.textPreguntaFinca}>
+              Nombre de tu finca
+          </Text>
+          
+          <TextInput
+              style={styles.inputNombre}
+              placeholder="ingresa el nombre de tu finca"
+              onChangeText={(value) => handleChangeText("nFinca",  value)}
+          />
+
+          <Text style = {styles.textPreguntaFinca}>
+              Ubicación
+          </Text>
+          
+          <TextInput
+              style={styles.inputNombre}
+              placeholder="ingresa la ubicación"
+              onChangeText={(value) => handleChangeText("Ubicacion",  value)}
+          />
+
+          <View style={{flexDirection:'row'}}>
+            <Text style = {styles.textPreguntaAreaTotal}>
+                Tamaño del cultivo de cacao
+            </Text>
+
+            <Text style = {styles.textPreguntaUnidadesCultivo}>
+                Unidades
+            </Text>
+          </View>
+
+          <View style={{flexDirection:'row'}}>
+            <TextInput
+                style={styles.inputAreaTotal}
+                placeholder="100"
+                onChangeText={(value) => handleChangeText("tCultivo",  value)}
+            />
+            <TextInput
+                style={styles.inputUnidades}
+                placeholder="Hectareas"
+                editable={false}
+                />
+          </View>
+          <View style={styles.margenInferior}></View>
+
+          <Text style = {styles.textPregunta}>
+              Clones de cacao 
+          </Text>
+          
+          <TextInput
+              style={styles.inputNombre2}
+              placeholder="ingresa los clones que crea que tiene"
+              onChangeText={(value) => handleChangeText("clonCacao",  value)}
+          />
+
+          <View style={styles.margenInferior}> 
+
+          <TouchableOpacity
+              style={styles.buttonCp}
+              onPress={ () => console.log(state)}
+            > 
+            {/*navigation.navigate('InicioScreen')*/}
+              <Text style= { styles.textButton }>{'Crear Usuario'}</Text>
+          </TouchableOpacity>
+          </View> 
+          
+          <View style={styles.margenInferior}> 
+            <Text></Text>
+          </View> 
+
+
+                
+                {/*{ 
+                  matriz.map((item) => {
+                    return (
+                        <View key = {item.key}>
+                        {item.action}
+                        </View>
+                        )
+                    })
+                }*/}
         </ScrollView>
         
       </View>
