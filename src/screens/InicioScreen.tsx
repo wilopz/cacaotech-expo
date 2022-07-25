@@ -1,12 +1,43 @@
-import { View, StyleSheet, ImageBackground, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ImageBackground, Dimensions, Text, TouchableOpacity, Alert } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from '../database/firebase';
+import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 interface Props extends StackScreenProps<any,any>{};
 
 const { width, height } = Dimensions.get('window');
 
+
+
 export const InicioScreen = ( {navigation}:Props ) => {
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log("Cuenta creada")
+      const user = userCredential.user
+      console.log(user)
+      navigation.navigate('ModelScreen')
+    })
+    .catch(error => {
+      console.log(error)
+      Alert.alert(error.message)
+    })
+  }
   return (
     <View style = {styles.container}>
       <ImageBackground
@@ -32,18 +63,21 @@ export const InicioScreen = ( {navigation}:Props ) => {
         <TextInput
             style={styles.inputEmail}
             placeholder="Ingresa tu email"
-            keyboardType="email-address"
+            //keyboardType="email-address"
+            onChangeText={(text) => setEmail(text)}
         />
         <TextInput
             style={styles.inputContrasena}
             placeholder="Contraseña"
             secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
         />
 
         <TouchableOpacity
             style={styles.buttonCp}
-            onPress={ () => navigation.navigate('ModelScreen')}
+            onPress={handleSignIn}
           > 
+          {/* () => navigation.navigate('ModelScreen')*/}
             <Text style= { styles.textButton }>{'iniciar sesión'}</Text>
         </TouchableOpacity> 
 

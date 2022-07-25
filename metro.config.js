@@ -5,7 +5,24 @@ module.exports = (async () => {
   return {
     resolver: {
       // Add bin to assetExts
-      assetExts: [...assetExts, 'bin'],
+      assetExts: [...assetExts, 'bin', 'cjs'],
     }
   };
 })();
+
+
+//const { getDefaultConfig } = require("@expo/metro-config");
+
+//module.exports = {
+//  transformer: {
+//    getTransformOptions: async () => ({
+//      transform: {
+//        experimentalImportSupport: false,
+//        inlineRequires: false,
+//      },
+//    }),
+//  },
+//  resolver: {
+//    sourceExts: ['jsx', 'js', 'ts', 'tsx'], //add here
+//  },
+//};

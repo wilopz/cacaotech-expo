@@ -1,8 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity, ScrollView, InteractionManager, Button } from 'react-native';
+import { View, StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity, ScrollView, InteractionManager, Button, Alert } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from '../database/firebase';
+
 
 
 interface Props extends StackScreenProps<any,any>{};
@@ -28,6 +32,43 @@ export const RegisterScreen = ( {navigation}:Props ) => {
   const handleChangeText = (name: any, value: any) => {
     setState({...state, [name]: value})
   }
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const handleCreateAccount = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log("Cuenta creada")
+      const user = userCredential.user
+      console.log(user)
+      navigation.navigate('InicioScreen')
+    })
+    .catch(error => {
+      console.log(error)
+      Alert.alert(error.message)
+    })
+  }
+
+  //const saveNewUser = async () => {
+  //  if (state.Nombre === ''){
+  //    alert('Please provide a name')
+  //  } else {
+  //    await firebase.db.collection('users').add({
+  //      Nombre: state.Nombre,
+  //      Documento: state.Documento,
+  //      Correo: state.Correo,
+  //      Contraseña: state.Contraseña,
+  //      nFinca: state.nFinca,
+  //      Ubicacion: state.Ubicacion,
+  //      tCultivo: state.tCultivo,
+  //      clonCacao: state.clonCacao
+  //    })
+  //  }
+  //}
 
  //const [isSelected, setSelection] = useState(false);
 
@@ -98,7 +139,7 @@ export const RegisterScreen = ( {navigation}:Props ) => {
               style={styles.inputNombre}
               placeholder="ingresa tu correo electrónico"
               keyboardType="email-address"
-              onChangeText={(value) => handleChangeText("Correo",  value)}
+              onChangeText={(text) => setEmail(text)}
           />
           
           <Text style = {styles.textPreguntaEmail}>
@@ -109,10 +150,10 @@ export const RegisterScreen = ( {navigation}:Props ) => {
               style={styles.inputNombre}
               placeholder="************"
               secureTextEntry={true}
-              onChangeText={(value) => handleChangeText("Contraseña",  value)}
+              onChangeText={(text) => setPassword(text)}
           />
 
-          <Text style = {styles.textPreguntaEmail}>
+          {/*<Text style = {styles.textPreguntaEmail}>
             Confirmar Contraseña*
           </Text>
 
@@ -120,7 +161,7 @@ export const RegisterScreen = ( {navigation}:Props ) => {
               style={styles.inputNombre}
               placeholder="************"
               secureTextEntry={true}
-          />
+                />*/}
 
           <Text style = {styles.textPreguntaFinca}>
               Nombre de tu finca
@@ -180,7 +221,7 @@ export const RegisterScreen = ( {navigation}:Props ) => {
 
           <TouchableOpacity
               style={styles.buttonCp}
-              onPress={ () => console.log(state)}
+              onPress={handleCreateAccount}
             > 
             {/*navigation.navigate('InicioScreen')*/}
               <Text style= { styles.textButton }>{'Crear Usuario'}</Text>
