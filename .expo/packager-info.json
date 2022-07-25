@@ -1,10 +1,10 @@
 {
-  "expoServerPort": null,
+  "expoServerPort": 19000,
   "devToolsPort": 19002,
-  "packagerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPort": 19000,
+  "expoServerNgrokUrl": "https://q9-juw.wilopz.cacaotech-expo.exp.direct",
+  "packagerNgrokUrl": "https://q9-juw.wilopz.cacaotech-expo.exp.direct",
+  "ngrokPid": 30968,
   "packagerPid": null,
   "webpackServerPort": null
 }
