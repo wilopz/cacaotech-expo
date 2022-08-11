@@ -15,13 +15,11 @@ const { width, height } = Dimensions.get('window');
 
 
 
-export const RegisterScreen = ( {navigation}:Props ) => {
+export const StorageScreen = ( {navigation}:Props ) => {
 
   const [state, setState] = useState({
     Nombre: "",
     Documento: "",
-    Correo: "",
-    Contraseña: "",
     nFinca: "",
     Ubicacion: "",
     tCultivo: "",
@@ -33,7 +31,11 @@ export const RegisterScreen = ( {navigation}:Props ) => {
     setState({...state, [name]: value})
   }
 
-  const [email, setEmail] = React.useState('');
+  const storage = () => {
+    console.log(state)
+    navigation.navigate('ModelScreen')
+  }
+  /* const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   
   const app = initializeApp(firebaseConfig);
@@ -51,7 +53,7 @@ export const RegisterScreen = ( {navigation}:Props ) => {
       console.log(error)
       Alert.alert(error.message)
     })
-  }
+  } */
 
   //const saveNewUser = async () => {
   //  if (state.Nombre === ''){
@@ -94,14 +96,14 @@ export const RegisterScreen = ( {navigation}:Props ) => {
                       styles.textTittle,
                   ]}
                   >
-                Registra aqui tus datos
+                Realiza el registro de la prediccion actual
           </Text>
 
           <Text style = {styles.textPregunta}>
             Nombre completo*
           </Text>
 
-          {/* <TextInput
+          <TextInput
             style={styles.inputNombre}
             placeholder="ingresa tu nombre"
             onChangeText={(value) => handleChangeText("Nombre",  value)}
@@ -129,9 +131,9 @@ export const RegisterScreen = ( {navigation}:Props ) => {
                 placeholder="Número"
                 onChangeText={(value) => handleChangeText("Documento",  value)}
                 />
-          </View> */}
+          </View>
 
-          <Text style = {styles.textPreguntaEmail}>
+         {/*  <Text style = {styles.textPreguntaEmail}>
               Email*
           </Text>
 
@@ -140,9 +142,9 @@ export const RegisterScreen = ( {navigation}:Props ) => {
               placeholder="ingresa tu correo electrónico"
               keyboardType="email-address"
               onChangeText={(text) => setEmail(text)}
-          />
+          /> */}
           
-          <Text style = {styles.textPreguntaEmail}>
+          {/* <Text style = {styles.textPreguntaEmail}>
             Contraseña*
           </Text>
 
@@ -152,11 +154,7 @@ export const RegisterScreen = ( {navigation}:Props ) => {
               secureTextEntry={true}
               onChangeText={(text) => setPassword(text)}
           />
-
-          <View style={styles.margenInferior}> 
-            <Text></Text>
-          </View> 
-
+ */}
           {/*<Text style = {styles.textPreguntaEmail}>
             Confirmar Contraseña*
           </Text>
@@ -167,7 +165,7 @@ export const RegisterScreen = ( {navigation}:Props ) => {
               secureTextEntry={true}
                 />*/}
 
-          {/* <Text style = {styles.textPreguntaFinca}>
+          <Text style = {styles.textPreguntaFinca}>
               Nombre de tu finca
           </Text>
           
@@ -175,9 +173,9 @@ export const RegisterScreen = ( {navigation}:Props ) => {
               style={styles.inputNombre}
               placeholder="ingresa el nombre de tu finca"
               onChangeText={(value) => handleChangeText("nFinca",  value)}
-          /> */}
+          />
 
-          {/* <Text style = {styles.textPreguntaFinca}>
+          <Text style = {styles.textPreguntaFinca}>
               Ubicación
           </Text>
           
@@ -185,9 +183,9 @@ export const RegisterScreen = ( {navigation}:Props ) => {
               style={styles.inputNombre}
               placeholder="ingresa la ubicación"
               onChangeText={(value) => handleChangeText("Ubicacion",  value)}
-          /> */}
+          />
 
-          {/* <View style={{flexDirection:'row'}}>
+          <View style={{flexDirection:'row'}}>
             <Text style = {styles.textPreguntaAreaTotal}>
                 Tamaño del cultivo de cacao
             </Text>
@@ -195,9 +193,9 @@ export const RegisterScreen = ( {navigation}:Props ) => {
             <Text style = {styles.textPreguntaUnidadesCultivo}>
                 Unidades
             </Text>
-          </View> */}
+          </View>
 
-          {/* <View style={{flexDirection:'row'}}>
+          <View style={{flexDirection:'row'}}>
             <TextInput
                 style={styles.inputAreaTotal}
                 placeholder="100"
@@ -209,26 +207,26 @@ export const RegisterScreen = ( {navigation}:Props ) => {
                 editable={false}
                 />
           </View>
-          <View style={styles.margenInferior}></View> */}
+          <View style={styles.margenInferior}></View>
 
-          {/* <Text style = {styles.textPregunta}>
-              Clones de cacao 
+          <Text style = {styles.textPregunta}>
+              Tipo de Cacao 
           </Text>
           
           <TextInput
               style={styles.inputNombre2}
-              placeholder="ingresa los clones que crea que tiene"
+              placeholder="ingresa el clon detectado"
               onChangeText={(value) => handleChangeText("clonCacao",  value)}
-          /> */}
+          />
 
           <View style={styles.margenInferior}> 
 
           <TouchableOpacity
               style={styles.buttonCp}
-              onPress={handleCreateAccount}
+              onPress={storage}
             > 
             {/*navigation.navigate('InicioScreen')*/}
-              <Text style= { styles.textButton }>{'Crear Usuario'}</Text>
+              <Text style= { styles.textButton }>{'Guardar registro'}</Text>
           </TouchableOpacity>
           </View> 
           
