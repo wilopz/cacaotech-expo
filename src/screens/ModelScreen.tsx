@@ -52,6 +52,7 @@ export const ModelScreen = ( {navigation}:Props ) => {
   const [image, setImage] = useState(null); // gets and sets the image selected from the user
   const [predictions, setPredictions] = useState(null); // gets and sets the predicted value from the model
   const [error, setError] = useState(false); // gets and sets any errors
+  const [probability, setProbability] = useState(null); // gets and sets any errors
   console.log("[+] Application started")
 
   useEffect(() => {
@@ -61,10 +62,8 @@ export const ModelScreen = ( {navigation}:Props ) => {
       console.log("[+] TensorFlow JS: Ready")
       // bundle the model files and load the model:
       console.log("[+] Loading Model")
-      const model = require("./modelo/final_model.json");
-      const weights = require("./modelo/final_model.bin");
-      // const model = require("./assets/model.json");
-      // const weights = require("./assets/model.bin");
+      const model = require("./modelo/full_model.json");
+      const weights = require("./modelo/full_model.bin");
       const loadedModel = await tf.loadLayersModel(
         bundleResourceIO(model, weights)
       );
@@ -87,14 +86,24 @@ export const ModelScreen = ( {navigation}:Props ) => {
         const source = { uri: response.uri };
         setImage(source); // put image path to the state
         const imageTensor = await imageToTensor(source); // prepare the image
-        let predictions = await model.predict(imageTensor); // send the image to the model
-        predictions = predictions.dataSync();
-        let classIndex = predictions.indexOf(Math.max(...predictions));
-        let classes: string[]= ['CCN51', 'FEAR5', 'TCS01', 'TCS19']
-        let result: any = classes[classIndex]
-        console.log(predictions.toString())
-        // console.log(`Predictions: ${predictions.dataSync()}`)
+        let inference = await model.predict(imageTensor); // send the image to the model
+        inference = inference.dataSync();
+        let classIndex: number = inference.indexOf(Math.max(...inference));
+        let types: string[]= ['CCN51', 'FEAR5', 'FSV41', 'TCS01', 'TCS06', 'TCS19']
+        let res = {
+          'CCN51': inference[0].toFixed(4)*100,
+          'FEAR5': inference[1].toFixed(4)*100,
+          'FSV41': inference[2].toFixed(4)*100,
+          'TCS01': inference[3].toFixed(4)*100,
+          'TCS06': inference[4].toFixed(4)*100,
+          'TCS19': inference[5].toFixed(4)*100
+        }
+        let result: any = types[classIndex]
+        let probability: any = (inference[classIndex]*100).toFixed(2);
+        console.log("Predictions: ");
+        console.log(res)
         setPredictions(result); // put model prediction to the state
+        setProbability(probability)
       }
     } catch (error) {
       setError(error);
@@ -103,6 +112,7 @@ export const ModelScreen = ( {navigation}:Props ) => {
 
   function reset() {
     setPredictions(null);
+    setProbability(null);
     setImage(null);
     setError(false);
   }
@@ -179,6 +189,7 @@ export const ModelScreen = ( {navigation}:Props ) => {
               image={image}
               predictions={predictions}
               error={error}
+              probability={probability}
             />
           </View>
 

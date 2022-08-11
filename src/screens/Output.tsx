@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 export default function Output(props: any) {
-    const { status, image, predictions, error } = props;
+    const { status, image, predictions, error, probability } = props;
     let output;
 
     if (!error) {
@@ -21,7 +21,7 @@ export default function Output(props: any) {
                         El fruto corresponde a un clon del tipo:{" "}
                     </Text>
                     <Text style={styles.predictedValue}>
-                        {predictions}{" "}
+                        {predictions}{": "}{probability}{"%"}
                     </Text>
                 </View>
               );
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     predictedImageExtras: { borderRadius: 20 },
     predictedHeader: { fontSize: 16, color: "black" },
     predictedValue: {
-        fontSize: 64,
+        fontSize: 48,
         fontWeight: "bold",
         color: "#2094FE",
         shadowOpacity: 0.75,
