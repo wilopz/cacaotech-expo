@@ -5,7 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from '../database/firebase';
+import { firebaseConfig } from '../config/fb';
 
 
 

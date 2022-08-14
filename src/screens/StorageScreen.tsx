@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity, ScrollView, InteractionManager, Button, Alert } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from '../database/firebase';
+//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+//import { collection, addDoc } from '@firebase/firestore';
+import fb from '../config/fb';
 
 
 
@@ -17,13 +17,16 @@ const { width, height } = Dimensions.get('window');
 
 export const StorageScreen = ( {navigation}:Props ) => {
 
+  
+
   const [state, setState] = useState({
     Nombre: "",
     Documento: "",
     nFinca: "",
     Ubicacion: "",
     tCultivo: "",
-    clonCacao: ""
+    clonCacao: "",
+    createAt: new Date()
 
   })
 
@@ -31,8 +34,24 @@ export const StorageScreen = ( {navigation}:Props ) => {
     setState({...state, [name]: value})
   }
 
+  const onSend = async () => {
+    await fb.db.collection('inferencias').add({
+      Nombre: state.Nombre,
+      Documento: state.Documento,
+      nFinca: state.nFinca,
+      Ubicacion: state.Ubicacion,
+      tCultivo: state.tCultivo,
+      clonCacao: state.clonCacao
+    })
+    alert('Saved')
+  }
+
+/*   const onSend = async () => {
+    await addDoc(collection(db, 'inferencias'), state);
+  } */
+
   const storage = () => {
-    console.log(state)
+    onSend()
     navigation.navigate('ModelScreen')
   }
   /* const [email, setEmail] = React.useState('');
@@ -130,6 +149,7 @@ export const StorageScreen = ( {navigation}:Props ) => {
                 style={styles.inputDocumento}
                 placeholder="Número"
                 onChangeText={(value) => handleChangeText("Documento",  value)}
+                keyboardType = 'number-pad'
                 />
           </View>
 
@@ -200,6 +220,7 @@ export const StorageScreen = ( {navigation}:Props ) => {
                 style={styles.inputAreaTotal}
                 placeholder="100"
                 onChangeText={(value) => handleChangeText("tCultivo",  value)}
+                keyboardType = 'number-pad'
             />
             <TextInput
                 style={styles.inputUnidades}

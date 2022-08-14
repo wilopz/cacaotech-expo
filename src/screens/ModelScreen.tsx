@@ -202,7 +202,7 @@ export const ModelScreen = ( {navigation}:Props ) => {
             style={styles.buttonCp}
             onPress={ () => navigation.navigate('StorageScreen')}
           > 
-            <Text style= { styles.textButton }>{'Historial'}</Text>
+            <Text style= { styles.textButton }>{'Registrar'}</Text>
         </TouchableOpacity> 
         </View>
         <View>
