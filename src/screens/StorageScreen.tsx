@@ -3,9 +3,8 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity, ScrollView, InteractionManager, Button, Alert } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
-//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-//import { collection, addDoc } from '@firebase/firestore';
-import fb from '../config/fb';
+
+
 
 
 
@@ -26,7 +25,7 @@ export const StorageScreen = ( {navigation}:Props ) => {
     Ubicacion: "",
     tCultivo: "",
     clonCacao: "",
-    createAt: new Date()
+    //createAt: new Date()
 
   })
 
@@ -34,7 +33,7 @@ export const StorageScreen = ( {navigation}:Props ) => {
     setState({...state, [name]: value})
   }
 
-  const onSend = async () => {
+/*   const onSend = async () => {
     await fb.db.collection('inferencias').add({
       Nombre: state.Nombre,
       Documento: state.Documento,
@@ -44,16 +43,16 @@ export const StorageScreen = ( {navigation}:Props ) => {
       clonCacao: state.clonCacao
     })
     alert('Saved')
-  }
+  } */
 
 /*   const onSend = async () => {
     await addDoc(collection(db, 'inferencias'), state);
   } */
 
-  const storage = () => {
+  /* const storage = () => {
     onSend()
     navigation.navigate('ModelScreen')
-  }
+  } */
   /* const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   
@@ -244,7 +243,7 @@ export const StorageScreen = ( {navigation}:Props ) => {
 
           <TouchableOpacity
               style={styles.buttonCp}
-              onPress={storage}
+              onPress={() => navigation.navigate('ModelScreen')}
             > 
             {/*navigation.navigate('InicioScreen')*/}
               <Text style= { styles.textButton }>{'Guardar registro'}</Text>

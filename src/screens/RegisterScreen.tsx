@@ -5,7 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from '../config/fb';
+
 
 
 
@@ -17,7 +17,7 @@ const { width, height } = Dimensions.get('window');
 
 export const RegisterScreen = ( {navigation}:Props ) => {
 
-  const [state, setState] = useState({
+  /* const [state, setState] = useState({
     Nombre: "",
     Documento: "",
     Correo: "",
@@ -27,19 +27,19 @@ export const RegisterScreen = ( {navigation}:Props ) => {
     tCultivo: "",
     clonCacao: ""
 
-  })
+  }) */
 
-  const handleChangeText = (name: any, value: any) => {
+ /*  const handleChangeText = (name: any, value: any) => {
     setState({...state, [name]: value})
-  }
+  } */
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+/*   const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app); */
 
-  const handleCreateAccount = () => {
+ /*  const handleCreateAccount = () => {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log("Cuenta creada")
@@ -51,7 +51,7 @@ export const RegisterScreen = ( {navigation}:Props ) => {
       console.log(error)
       Alert.alert(error.message)
     })
-  }
+  } */
 
   //const saveNewUser = async () => {
   //  if (state.Nombre === ''){
@@ -225,7 +225,7 @@ export const RegisterScreen = ( {navigation}:Props ) => {
 
           <TouchableOpacity
               style={styles.buttonCp}
-              onPress={handleCreateAccount}
+              onPress={() => navigation.navigate('InicioScreen')} 
             > 
             {/*navigation.navigate('InicioScreen')*/}
               <Text style= { styles.textButton }>{'Crear Usuario'}</Text>

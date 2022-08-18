@@ -2,8 +2,6 @@ import { View, StyleSheet, ImageBackground, Dimensions, Text, TouchableOpacity, 
 import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from '../config/fb';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
@@ -20,12 +18,12 @@ export const InicioScreen = ( {navigation}:Props ) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+  /* const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app); */
 
 
 
-  const handleSignIn = () => {
+  /* const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log("Cuenta creada")
@@ -37,7 +35,7 @@ export const InicioScreen = ( {navigation}:Props ) => {
       console.log(error)
       Alert.alert(error.message)
     })
-  }
+  } */
   return (
     <View style = {styles.container}>
       <ImageBackground
@@ -75,7 +73,7 @@ export const InicioScreen = ( {navigation}:Props ) => {
 
         <TouchableOpacity
             style={styles.buttonCp}
-            onPress={handleSignIn}
+            onPress={() => navigation.navigate('ModelScreen')}
           > 
           {/* () => navigation.navigate('ModelScreen')*/}
             <Text style= { styles.textButton }>{'iniciar sesión'}</Text>
