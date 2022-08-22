@@ -19,6 +19,7 @@
     "@tensorflow/tfjs": "^3.18.0",
     "@tensorflow/tfjs-react-native": "^0.8.0",
     "async-storage": "^0.1.0",
+    "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "expo": "~45.0.0",
     "expo-camera": "^12.2.0",

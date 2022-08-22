@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity, ScrollView, InteractionManager } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
+import { registro } from '../Registro';
+import { getRegistros } from '../RegistroService';
+import { RegistroItem } from '../RegistroItem';
+import axios from 'axios';
+
+
 
 
 interface Props extends StackScreenProps<any,any>{};
@@ -10,197 +16,23 @@ const { width, height } = Dimensions.get('window');
 
 export const HistoryScreen = ( {navigation}:Props ) => {
 
-  const [isSelected, setSelection] = useState(false);
+  const [Registros, setRegistros] = useState<registro[]>([])
 
-  //Contenido del scrollview
-  let [matriz, setMatriz] = useState([
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  const url = "http://192.168.1.6:4000/registro";
 
-    { key:'1',
-    action: 
-      <>
-        <Text style = {[
-              styles.text, 
-              styles.textTittle
-            ]}>
-          Historial de análisis
-        </Text>
-      </>
-    },
+  const loadregistro = async() => {
+    const res = await getRegistros();
+    setRegistros(res.data)
+  }
 
-    { key:'2', 
-    action:
-      <>
-        <View style = {styles.consultas}>
-          <View style = {styles.izquierdo}>
-            <View style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.fechas}>Análisis --/--/--</Text>
-            </View>
-            <View  style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
-            </View>
-          </View>
-          <View style = {styles.derecho}>
-            <Text style = {styles.textanalisis}>Estado:</Text>
-          </View>
-        </View>
-      </>
-      
-    },
-
-    { key:'3', 
-    action: 
-      <>
-        <View style = {styles.consultas}>
-          <View style = {styles.izquierdo}>
-            <View style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.fechas}>Análisis --/--/--</Text>
-            </View>
-            <View  style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
-            </View>
-          </View>
-          <View style = {styles.derecho}>
-            <Text style = {styles.textanalisis}>Estado:</Text>
-          </View>
-        </View>
-      </>
-    },
-
-    { key:'4',
-    action: 
-      <>
-        <View style = {styles.consultas}>
-          <View style = {styles.izquierdo}>
-            <View style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.fechas}>Análisis --/--/--</Text>
-            </View>
-            <View  style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
-            </View>
-          </View>
-          <View style = {styles.derecho}>
-            <Text style = {styles.textanalisis}>Estado:</Text>
-          </View>
-        </View>
-      </>
-    },
-
-    { key:'5',
-    action: 
-      <>
-        <View style = {styles.consultas}>
-          <View style = {styles.izquierdo}>
-            <View style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.fechas}>Análisis --/--/--</Text>
-            </View>
-            <View  style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
-            </View>
-          </View>
-          <View style = {styles.derecho}>
-            <Text style = {styles.textanalisis}>Estado:</Text>
-          </View>
-        </View>
-      </>
-    },
-
-    { key:'6',
-    action: 
-      <>
-        <View style = {styles.consultas}>
-          <View style = {styles.izquierdo}>
-            <View style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.fechas}>Análisis --/--/--</Text>
-            </View>
-            <View  style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
-            </View>
-          </View>
-          <View style = {styles.derecho}>
-            <Text style = {styles.textanalisis}>Estado:</Text>
-          </View>
-        </View>
-      </>
-    },
-
-    { key:'7',
-    action: 
-      <>
-        <View style = {styles.consultas}>
-          <View style = {styles.izquierdo}>
-            <View style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.fechas}>Análisis --/--/--</Text>
-            </View>
-            <View  style = {{
-              width:'100%',
-              height:'50%',
-            }}>
-              <Text style = {styles.textanalisis}>Fotos cargadas:</Text>
-            </View>
-          </View>
-          <View style = {styles.derecho}>
-            <Text style = {styles.textanalisis}>Estado:</Text>
-          </View>
-        </View>
-      </>
-    },
-
-    { key:'8',
-    action:
-      <>
-        <View style={styles.margenInferior}> 
-          <TouchableOpacity
-              style={styles.buttonCp}
-              onPress={ () => console.log('borrar')}
-            > 
-              <Text style= { styles.textButton }>{'Borrar selección'}</Text>
-          </TouchableOpacity> 
-        </View>
-        <View style={styles.margenInferior}> 
-          <TouchableOpacity
-              style={styles.buttonCp}
-              onPress={ () => navigation.navigate('ModelScreen')}
-            > 
-              <Text style= { styles.textButton }>{'Regresar'}</Text>
-          </TouchableOpacity> 
-        </View> 
-      </>
+  useEffect(() => {
+      loadregistro()
     }
-
-  ]);
+  , [])
+  
 
   return (
     <View style={styles.container}>
@@ -216,15 +48,23 @@ export const HistoryScreen = ( {navigation}:Props ) => {
         </View>  
 
         <ScrollView style={{flex:1, height:height}}>
-          { 
-            matriz.map((item) => {
-              return (
-                  <View key = {item.key}>
-                  {item.action}
-                  </View>
-                  )
-              })
-          }
+         
+          <View>
+            {Registros.map((registro) => {
+              return <RegistroItem Registro={registro}/>
+            })}
+          </View>
+          
+          <View style={styles.margenInferior}> 
+
+            <TouchableOpacity
+                style={styles.buttonCp}
+                onPress={() => navigation.navigate('ModelScreen')}
+              > 
+              {/*navigation.navigate('InicioScreen')*/}
+                <Text style= { styles.textButton }>{'Guardar registro'}</Text>
+            </TouchableOpacity>
+          </View> 
         </ScrollView>
         
       </View>

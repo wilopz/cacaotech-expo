@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity, ScrollView, InteractionManager, Button, Alert } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
+import { registro } from '../Registro';
+import { createRegistro } from '../RegistroService';
 
 
 
@@ -16,9 +18,10 @@ const { width, height } = Dimensions.get('window');
 
 export const StorageScreen = ( {navigation}:Props ) => {
 
+
   
 
-  const [state, setState] = useState({
+  const [state, setState] = useState<registro>({
     Nombre: "",
     Documento: "",
     nFinca: "",
@@ -33,26 +36,20 @@ export const StorageScreen = ( {navigation}:Props ) => {
     setState({...state, [name]: value})
   }
 
-/*   const onSend = async () => {
-    await fb.db.collection('inferencias').add({
-      Nombre: state.Nombre,
-      Documento: state.Documento,
-      nFinca: state.nFinca,
-      Ubicacion: state.Ubicacion,
-      tCultivo: state.tCultivo,
-      clonCacao: state.clonCacao
-    })
-    alert('Saved')
-  } */
+  const onSend = async () => {
+    const res = await createRegistro(state)
+    alert('Registro guardado!')
+    console.log(res.data);
+  }
 
 /*   const onSend = async () => {
     await addDoc(collection(db, 'inferencias'), state);
   } */
 
-  /* const storage = () => {
+  const storage = () => {
     onSend()
     navigation.navigate('ModelScreen')
-  } */
+  }
   /* const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   
@@ -243,7 +240,7 @@ export const StorageScreen = ( {navigation}:Props ) => {
 
           <TouchableOpacity
               style={styles.buttonCp}
-              onPress={() => navigation.navigate('ModelScreen')}
+              onPress={storage}
             > 
             {/*navigation.navigate('InicioScreen')*/}
               <Text style= { styles.textButton }>{'Guardar registro'}</Text>

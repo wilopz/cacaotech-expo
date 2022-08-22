@@ -208,9 +208,9 @@ export const ModelScreen = ( {navigation}:Props ) => {
         <View>
         <TouchableOpacity
             style={styles.buttonCp}
-            onPress={ () => navigation.navigate('InicioScreen')}
+            onPress={ () => navigation.navigate('HistoryScreen')}
           > 
-            <Text style= { styles.textButton }>{'Salir'}</Text>
+            <Text style= { styles.textButton }>{'Historial'}</Text>
         </TouchableOpacity> 
         </View>
       </View>

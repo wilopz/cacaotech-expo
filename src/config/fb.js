@@ -1,4 +1,4 @@
-import Constants from "expo-constants";
+/* import Constants from "expo-constants";
 import firebase from 'firebase/app';
 import "firebase/firestore"
 import { initializeApp } from "firebase/app";
@@ -21,5 +21,5 @@ const db = firebase.firestore();
 export default {
   db
 }
-
+ */
 
