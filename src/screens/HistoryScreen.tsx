@@ -48,11 +48,22 @@ export const HistoryScreen = ( {navigation}:Props ) => {
         </View>  
 
         <ScrollView style={{flex:1, height:height}}>
+
+        <Text style = {[
+              styles.text, 
+              styles.textTittle
+            ]}>
+          Historial de análisis
+        </Text>
          
           <View>
             {Registros.map((registro) => {
               return <RegistroItem Registro={registro}/>
             })}
+          </View>
+
+          <View style={styles.margen}> 
+            <Text></Text>
           </View>
           
           <View style={styles.margenInferior}> 
@@ -62,7 +73,7 @@ export const HistoryScreen = ( {navigation}:Props ) => {
                 onPress={() => navigation.navigate('ModelScreen')}
               > 
               {/*navigation.navigate('InicioScreen')*/}
-                <Text style= { styles.textButton }>{'Guardar registro'}</Text>
+                <Text style= { styles.textButton }>{'Regresar'}</Text>
             </TouchableOpacity>
           </View> 
         </ScrollView>

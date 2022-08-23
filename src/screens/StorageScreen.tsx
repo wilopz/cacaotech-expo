@@ -39,7 +39,7 @@ export const StorageScreen = ( {navigation}:Props ) => {
   const onSend = async () => {
     const res = await createRegistro(state)
     alert('Registro guardado!')
-    console.log(res.data);
+    /* console.log(res.data); */
   }
 
 /*   const onSend = async () => {
