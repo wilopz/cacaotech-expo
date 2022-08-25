@@ -62,8 +62,8 @@ export const ModelScreen = ( {navigation}:Props ) => {
       console.log("[+] TensorFlow JS: Ready")
       // bundle the model files and load the model:
       console.log("[+] Loading Model")
-      const model = require("./modelo/full_model.json");
-      const weights = require("./modelo/full_model.bin");
+      const model = require("./modelo/model.json");
+      const weights = require("./modelo/model.bin");
       const loadedModel = await tf.loadLayersModel(
         bundleResourceIO(model, weights)
       );
