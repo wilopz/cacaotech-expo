@@ -177,13 +177,12 @@ export const ModelScreen = ( {navigation}:Props ) => {
             onPress={model && !predictions ? handlerSelectImage : () => { }} 
             // Activates handler only if the model has been loaded and there are no predictions done yet
           >
-            <ImageBackground
+            {/* <ImageBackground
               source={image}
               style={styles.predictedImage}
               imageStyle={styles.predictedImageExtras}
-            ></ImageBackground>
-          </TouchableOpacity>
-          <View>
+            ></ImageBackground> */}
+            <View>
             <Output
               status={status}
               image={image}
@@ -192,6 +191,8 @@ export const ModelScreen = ( {navigation}:Props ) => {
               probability={probability}
             />
           </View>
+          </TouchableOpacity>
+          
 
         </View>
         <View style={{
@@ -271,6 +272,7 @@ const styles = StyleSheet.create({
   predictedImage: {
     width: 250,
     height: 250,
+    opacity: 0.1,
     alignItems: "center",
     justifyContent: "center",
   },
