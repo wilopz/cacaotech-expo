@@ -26,7 +26,8 @@ export default {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.dolarte_13.cacaotechexpo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,7 +39,11 @@ export default {
       projectId: process.env.PROJECT_ID,
       storageBucket: process.env.STORAGE_BUCKET,
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
-      appId: process.env.APP_ID
-    }
+      appId: process.env.APP_ID,
+      "eas": {
+        "projectId": "391f4caa-2d96-487b-bb12-65491c542670"
+      }
+    },
+
   }
 }
